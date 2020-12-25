@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		 <reference name="root"><!-- set default page template-->
+  			<action method="setTemplate"><template>page/1column.phtml</template></action>   
+		</reference>
+		<reference name="left"><!-- set static block to sidebar -->
+			<block type="cms/block" name="left.delivery">
+			<action method="setBlockId"><block_id>sidebar_promise</block_id></action>
+			</block>
+			
+			<!-- Remove blocks from left sidebar -->
+			<remove name="left.permanent.callout"/>
+	        <remove name="right.newsletter"/>
+	        <remove name="cart_sidebar"/>
+	        <remove name="sale.reorder.sidebar"/>
+		</reference>
+		
+        <reference name="right">
+        	<!-- reorder "Compare Products" to below "My Cart" block -->
+        	<action method="unsetChild">
+        			<name>catalog.compare.sidebar</name>
+        	</action>
+            <block type="catalog/product_compare_sidebar" after="cart_sidebar" name="catalog.compare.sidebar.replacement" template="catalog/product/compare/sidebar.phtml"/>
+            
+            <!-- reorder "Compare Products" to top of blocks -->
+            <!--<action method="unsetChild">
+        			<name>catalog.compare.sidebar</name>
+        	</action>
+            <block type="catalog/product_compare_sidebar" before="-" name="catalog.compare.sidebar.replacement" template="catalog/product/compare/sidebar.phtml"/>-->
+            
+            <!-- reorder "Compare Products" to bottom of blocks -->
+           	<!--<action method="unsetChild">
+        			<name>catalog.compare.sidebar</name>
+        	</action>
+            <block type="catalog/product_compare_sidebar" after="-" name="catalog.compare.sidebar.replacement" template="catalog/product/compare/sidebar.phtml"/>-->
+            
+            <!-- Remove blocks from right sidebar -->
+            <remove name="right.permanent.callout"/>
+	        <remove name="livechat.chat"/>
+	        <remove name="right.poll"/>
+	        <remove name="paypal.partner.right.logo"/>
+	        <remove name="cart_sidebar"/>
+	        <remove name="sale.reorder.sidebar"/>
+	        <remove name="catalog.compare.sidebar"/>
+        </reference>
+        
+    </default>
+    
+	<cms_index_index>
+			<reference name="root">
+			<action method="setTemplate"><!-- set one column layout for homepage: example code for layout handle. Best to set page layout through Magento's CMS instead of using this -->
+			<template>page/1column.phtml</template>
+			</action>
+			</reference>
+			<reference name="content">
+			    <block type="catalog/product_new" template="catalog/product/new.phtml">
+			        <action method="setProductsCount"><count>3</count></action>
+			        <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>5</count></action>
+			        <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+			        <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+			        <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+			        <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+			    </block>
+			</reference>
+	</cms_index_index>
+		
+</layout>

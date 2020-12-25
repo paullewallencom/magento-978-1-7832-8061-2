@@ -1,0 +1,45 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ *
+ * @category    design
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="footer-container">
+    <div class="footer">
+    	<div class="footer-about footer-col">
+    		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_about')->toHtml(); ?>
+    		<?php /* List all top-level categories */
+				$_helper = Mage::helper('catalog/category');
+				$_categories = $_helper->getStoreCategories();
+				if (count($_categories) > 0): ?>
+				    <ul>
+				        <?php foreach($_categories as $_category): ?>
+				            <li>
+				                <a href="<?php echo $_helper->getCategoryUrl($_category) ?>">
+				                    <?php echo $_category->getName() ?>
+				                </a>
+				            </li>
+				        <?php endforeach; ?>
+				    </ul>
+				<?php endif; ?>
+		</div>
+    	<div class="footer-col footer-categories">
+        	<?php echo $this->getChildHtml() ?>
+		</div>
+        <address><?php echo $this->getCopyright() ?></address>
+    </div>
+</div>

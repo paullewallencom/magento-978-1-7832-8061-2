@@ -1,0 +1,6 @@
+/* Custom print CSS for M18 theme */
+
+.breadcrumbs,
+.sidebar {
+display: none;
+}
